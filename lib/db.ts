@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const MONGODB_URL = process.env.MONGODB_URL!
 
 if (!MONGODB_URL) {
-  throw new Error("Please define MONGO_URL in env variables")
+  throw new Error("Please define MONGO_URL in env variables");
 }
 
 let cached = global.mongoose; //cached = ek object jo existing Mongoose connection ya promise ko store karega.
