@@ -1,11 +1,8 @@
 import mongoose, { Schema, model, models } from "mongoose";
-import { unique } from "next/dist/build/utils";
-import { title } from "process";
 
-
-export const VIDEO_DIMENTIONS = {
+export const VIDEO_DIMENSIONS = {
   width: 1080,
-  height: 1920
+  heigth: 1920,
 } as const;
 
 export interface IVideo {
@@ -18,34 +15,27 @@ export interface IVideo {
   transformation?: {
     height: number;
     width: number;
-    quality: number;
-
-
+    quality?: number;
   };
 }
-
 const videoSchema = new Schema<IVideo>(
   {
-    title:{type:String,required:true},
-    description:{type:String,required:true},
-    videoUrl:{type:String,required:true},
-    thumbnailUrl:{type:String,required:true},
-    controls:{type:Boolean,default:true},
-    transformation:{
-      height:{type:Number, default:VIDEO_DIMENTIONS.height},
-      width:{type:Number, default:VIDEO_DIMENTIONS.width},
-      quality :{type:Number, min:1,max:100},
-
-
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    videoUrl: { type: String, required: true },
+    thumbnailUrl: { type: String, required: true },
+    controls: { type: Boolean, default: true },
+    transformation: {
+      height: { type: Number, default: VIDEO_DIMENSIONS.heigth },
+      width: { type: Number, default: VIDEO_DIMENSIONS.width },
+      quality: { type: Number, min: 1, max: 100 },
     },
-
-
   },
   {
-    timestamps: true
+    timestamps: true,
   }
-)
+);
 
-const Video=models?.Video || model<IVideo> ("Video",videoSchema);
+const Video = models?.Video || model<IVideo>("Video", videoSchema);
 
 export default Video;

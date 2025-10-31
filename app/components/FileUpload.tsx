@@ -49,10 +49,10 @@ const FileUpload = ({
       const authRes = await fetch("/api/auth/imagekit-auth")
       const auth = await authRes.json();
 
-      await upload({
+     const res= await upload({
         file,
         fileName: file.name,
-        publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,
+        publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY!,
         signature: auth.signature,
         expire: auth.expire,
         token: auth.token,
@@ -65,8 +65,11 @@ const FileUpload = ({
         },
         
       })
+      onSuccess(res)
     } catch (error) {
-
+console.error("upload failed")
+    }finally{
+      setUploading(false);
     }
   }
 
